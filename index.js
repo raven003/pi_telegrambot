@@ -105,7 +105,7 @@ function scrape(options){
     .catch(err => {
       console.log(err);
     });
-    return final.toString();
+    return final.toString(); // drauf warten bis es fertig ist?
 }
 
 
@@ -117,28 +117,27 @@ const token = "465730749:AAH0TKK3GQ9iUa1ruyhpYLbeCong8L7vCmg";
 const bot = new TelegramBot(token, { polling: true });
 
 bot.on("message", msg => {
-  var received = "getbio";
+ let r = 'getbio';
   if (
     msg.text
       .toString()
       .toLowerCase()
-      .indexOf(received) === 0
+      .indexOf(r) === 0
   ) {
     //console.log(message);
     bot.sendMessage(msg.chat.id, scrape(optionsbio), { parse_mode: "HTML" });
   }
+  let y = 'getcold';
+  if (
+    msg.text
+      .toString()
+      .toLowerCase()
+      .indexOf(y) === 0
+  ) {
+    //console.log(message);
+    bot.sendMessage(msg.chat.id, scrape(optionscold), { parse_mode: "HTML" });
+  }
 });
-bot.on("message", msg => {
-    var received = "getcold";
-    if (
-      msg.text
-        .toString()
-        .toLowerCase()
-        .indexOf(received) === 0
-    ) {
-      //console.log(message);
-      bot.sendMessage(msg.chat.id, scrape(optionscold), { parse_mode: "HTML" });
-    }
-  });
+
 
 //anything
