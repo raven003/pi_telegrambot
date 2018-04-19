@@ -34,6 +34,32 @@ const optionssuper = {
     return cheerio.load(body);
   }
 };
+const optionsdrinks = {
+  uri: `https://www.netto-online.de/14971.ohtm/8463/Getraenke`,
+  transform: function(body) {
+    return cheerio.load(body);
+  }
+};
+const optionswurst = {
+  uri: `https://www.netto-online.de/14965.ohtm/8463/Fleisch-Wurst`,
+  transform: function(body) {
+    return cheerio.load(body);
+  }
+};
+const optionsdrogerie = {
+  uri: `https://www.netto-online.de/14973.ohtm/8463/Drogerie`,
+  transform: function(body) {
+    return cheerio.load(body);
+  }
+};
+const optionsobst = {
+  uri: `https://www.netto-online.de/14964.ohtm/8463/Obst-Gemuese`,
+  transform: function(body) {
+    return cheerio.load(body);
+  }
+};
+
+
 
 let preise = [];
 
@@ -139,7 +165,7 @@ bot.onText(/\/start/, (msg) => {
     
   bot.sendMessage(msg.chat.id, "Welcome", {
   "reply_markup": {
-      "keyboard": [["getHot", "Second sample"],   ["Keyboard"], ["I'm robot"]]
+      "keyboard": [["nhot", "nbio","ndrinks"],   ["nkalt","nsweet","nsuper"], ["nwurst","ndrog","ngmüs"]]
       }
   });
       
@@ -147,19 +173,108 @@ bot.onText(/\/start/, (msg) => {
 
 bot.on("message",onBotMessage)
 async function onBotMessage(msg) {
-  const scrapedshit = await scrape(optionsknüller);
-  if (scrapedshit) {
-    let r = "gethot";
+  
+  let r = "nhot";
+  if (
+    msg.text
+    .toString()
+    .toLowerCase()
+    .indexOf(r) === 0
+  ) {
+    
+      const scrapedshit = await scrape(optionsknüller);
+      bot.sendMessage(msg.chat.id, scrapedshit, { parse_mode: "HTML" });
+    }
+    r = "nbio";
     if (
       msg.text
+      .toString()
+      .toLowerCase()
+      .indexOf(r) === 0
+    ) {
+      
+        const scrapedshit = await scrape(optionsbio);
+        bot.sendMessage(msg.chat.id, scrapedshit, { parse_mode: "HTML" });
+      }
+      r = "nkalt";
+      if (
+        msg.text
         .toString()
         .toLowerCase()
         .indexOf(r) === 0
-    ) {
-      //console.log(message);
-      bot.sendMessage(msg.chat.id, scrapedshit, { parse_mode: "HTML" });
-    }
-  } 
+      ) {
+        
+          const scrapedshit = await scrape(optionscold);
+          bot.sendMessage(msg.chat.id, scrapedshit, { parse_mode: "HTML" });
+        }
+        r = "nsuper";
+        if (
+          msg.text
+          .toString()
+          .toLowerCase()
+          .indexOf(r) === 0
+        ) {
+          
+            const scrapedshit = await scrape(optionssuper);
+            bot.sendMessage(msg.chat.id, scrapedshit, { parse_mode: "HTML" });
+          }
+          r = "nsweet";
+          if (
+            msg.text
+            .toString()
+            .toLowerCase()
+            .indexOf(r) === 0
+          ) {
+            
+              const scrapedshit = await scrape(optionssweet);
+              bot.sendMessage(msg.chat.id, scrapedshit, { parse_mode: "HTML" });
+            }
+            r = "ndrinks";
+            if (
+              msg.text
+              .toString()
+              .toLowerCase()
+              .indexOf(r) === 0
+            ) {
+              
+                const scrapedshit = await scrape(optionsdrinks);
+                bot.sendMessage(msg.chat.id, scrapedshit, { parse_mode: "HTML" });
+              }
+              r = "nwurst";
+              if (
+                msg.text
+                .toString()
+                .toLowerCase()
+                .indexOf(r) === 0
+              ) {
+                
+                  const scrapedshit = await scrape(optionswurst);
+                  bot.sendMessage(msg.chat.id, scrapedshit, { parse_mode: "HTML" });
+                }
+                r = "ndrog";
+                if (
+                  msg.text
+                  .toString()
+                  .toLowerCase()
+                  .indexOf(r) === 0
+                ) {
+                  
+                    const scrapedshit = await scrape(optionsdrogerie);
+                    bot.sendMessage(msg.chat.id, scrapedshit, { parse_mode: "HTML" });
+                  }
+                  r = "ngmüs";
+                  if (
+                    msg.text
+                    .toString()
+                    .toLowerCase()
+                    .indexOf(r) === 0
+                  ) {
+                    
+                      const scrapedshit = await scrape(optionsobst);
+                      bot.sendMessage(msg.chat.id, scrapedshit, { parse_mode: "HTML" });
+                    }
+
+   
   }
 
 
