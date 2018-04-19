@@ -135,12 +135,21 @@ async function onBotMessage() {
 }
 
 //console.log(scrape(optionsbio));
+bot.onText(/\/start/, (msg) => {
+    
+  bot.sendMessage(msg.chat.id, "Welcome", {
+  "reply_markup": {
+      "keyboard": [["getHot", "Second sample"],   ["Keyboard"], ["I'm robot"]]
+      }
+  });
+      
+  });
 
 bot.on("message",onBotMessage)
 async function onBotMessage(msg) {
   const scrapedshit = await scrape(optionsknüller);
   if (scrapedshit) {
-    let r = "get";
+    let r = "gethot";
     if (
       msg.text
         .toString()
@@ -150,20 +159,8 @@ async function onBotMessage(msg) {
       //console.log(message);
       bot.sendMessage(msg.chat.id, scrapedshit, { parse_mode: "HTML" });
     }
-  } else {
-    let r = "get";
-    if (
-      msg.text
-        .toString()
-        .toLowerCase()
-        .indexOf(r) === 0
-    ) {
-      //console.log(message);
-      bot.sendMessage(msg.chat.id, "<b>Fehler beim scrapen</b>", {
-        parse_mode: "HTML"
-      });
-    }
+  } 
   }
-}
+
 
 //anything
